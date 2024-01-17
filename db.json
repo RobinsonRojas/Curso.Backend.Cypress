@@ -1,0 +1,52 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "first_name": "Javier",
+      "last_name": "Eschweiler",
+      "email": "javier@platzi.com"
+    },
+    {
+      "id": "2",
+      "first_name": "Juan",
+      "last_name": "Palmer",
+      "email": "juan@platzi.com"
+    },
+    {
+      "id": "3",
+      "first_name": "Ana",
+      "last_name": "Smith",
+      "email": "ana@platzi.com"
+    },
+    {
+      "id": "3544",
+      "first_name": "Robinson",
+      "last_name": "Rojas",
+      "email": "javier@platzi.com"
+    },
+    {
+      "id": "3422",
+      "first_name": "Robinson",
+      "last_name": "Rojas",
+      "email": "javier@platzi.com"
+    },
+    {
+      "id": "daa5",
+      "first_name": "Robinson",
+      "last_name": "Rojas",
+      "email": "javier@platzi.com"
+    },
+    {
+      "id": "4ad2",
+      "first_name": "Robinson",
+      "last_name": "Rojas",
+      "email": "javier@platzi.com"
+    },
+    {
+      "id": "10b9",
+      "first_name": "Robinson",
+      "last_name": "Rojas",
+      "email": "javier@platzi.com"
+    }
+  ]
+}
