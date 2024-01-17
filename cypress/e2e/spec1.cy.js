@@ -20,4 +20,13 @@ describe('Probando Apis', () => {
 			.its('first_name')
 			.should('eq', 'Javier')
 	})
+
+	it('Probando todo en un Request', () => {
+		cy.request('employees/1').then((response) => {
+			expect(response.headers['content-type']).eq('application/json')
+			expect(response.status).eq(200)
+			expect(response.body.first_name).eq('Javier')
+			expect(response.body.email).contain('@platzi.com')
+		})
+	})
 })
