@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 describe('Probando Apis', () => {
 	it('Validar el header y el content type', () => {
 		cy.request('/employees')
@@ -14,7 +16,7 @@ describe('Probando Apis', () => {
 			.should('eq', 404)
 	})
 
-	it('probado el body', () => {
+	it('Validando el body', () => {
 		cy.request('employees/1')
 			.its('body')
 			.its('first_name')
@@ -27,6 +29,16 @@ describe('Probando Apis', () => {
 			expect(response.status).eq(200)
 			expect(response.body.first_name).eq('Javier')
 			expect(response.body.email).contain('@platzi.com')
+		})
+	})
+
+	it('Validando mensaje de error', () => {
+		cy.request({
+			url: 'https://api.escuelajs.co/api/v1/categoriesxxx',
+			failOnStatusCode: false,
+		}).then((response) => {
+			expect(response.status).eq(404)
+			expect(response.body.error).contain('Not Found')
 		})
 	})
 })
