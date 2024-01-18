@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('Probando Apis', () => {
+describe('Probando peticiones REST', () => {
 	it('Validar el header y el content type', () => {
 		cy.request('/employees')
 			.its('headers')
@@ -40,5 +40,42 @@ describe('Probando Apis', () => {
 			expect(response.status).eq(404)
 			expect(response.body.error).contain('Not Found')
 		})
+	})
+
+	it('Validando crear un empleado', () => {
+		cy.request({
+			method: 'POST',
+			url: 'employees',
+			body: {
+				first_name: 'xxx',
+				last_name: 'xxxx',
+				email: 'xxxxxxx@platzi.com',
+			},
+		}).then((response) => {
+			expect(response.status).eq(201)
+			expect(response.body).to.have.property('id')
+
+			const id = response.body.id
+
+			cy.wrap(id).as('id')
+		})
+	})
+
+	it('Validando usuario creado, editarlo y eliminarlo', function () {
+		cy.request(`employees/${this.id}`)
+			.its('body.first_name')
+			.should('eq', 'xxx')
+
+		cy.request('PATCH', `employees/${this.id}`, { first_name: 'xxx2' }).then(
+			(response) => {
+				cy.log(response.body)
+			}
+		)
+
+		cy.request('DELETE', `employees/${this.id}`)
+			.end()
+			.request({ url: `employees/${this.id}`, failOnStatusCode: false })
+			.its('status')
+			.should('eq', 404)
 	})
 })
