@@ -79,3 +79,40 @@ describe('Probando peticiones REST', () => {
 			.should('eq', 404)
 	})
 })
+
+describe.only('Probando Peticiones GraphQL', () => {
+	const gqlQuery = `query personajes($page: Int, $name: String) {
+		characters(page: $page, filter: {name: $name}) {
+			info {
+				count
+				pages
+				next
+				prev
+			}
+			results {
+				id
+				name
+				gender
+			}
+		}
+	}`
+
+	const gqlVariables = {
+		page: 1,
+		name: 'rick',
+	}
+
+	it('Primera peticion GraphQL', () => {
+		cy.request({
+			method: 'POST',
+			url: 'https://rickandmortyapi.com/graphql',
+			body: {
+				query: gqlQuery,
+				variables: gqlVariables,
+			},
+		}).then((response) => {
+			cy.log(response.body)
+			expect(response.body.data.characters.results[0].name).eq('Rick Sanchez')
+		})
+	})
+})
