@@ -8,16 +8,25 @@ const sql = postgres(
 async function queryDB(query) {
 	//const result = await sql`select version()`;
 	switch (query) {
-		case 'Consulta1':
-			return (result1 = await sql`SELECT * FROM public.playing_with_neon`)
+		case 'insert':
+			return await sql`INSERT INTO personas(name, apellido) values('Arley', 'Novoa')`
 			break
 
-		case 'Consulta2':
-			return (result2 = await sql`select version()`)
+		case 'select':
+			return await sql`SELECT * FROM personas`
+			break
+
+		case 'update':
+			return await sql`UPDATE personas
+			SET name = 'AAAAAAAAAAA', apellido = 'NNNNNNNNNN'
+			WHERE id = (SELECT max(id) FROM personas)`
+
+		case 'delete':
+			return await sql`delete from personas where id = (SELECT max(id) FROM personas)`
 			break
 
 		default:
-			return (result3 = null)
+			return null
 			break
 	}
 }

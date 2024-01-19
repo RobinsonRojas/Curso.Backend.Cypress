@@ -102,7 +102,7 @@ describe.only('Probando Peticiones GraphQL', () => {
 		name: 'rick',
 	}
 
-	it('Primera peticion GraphQL', () => {
+	it('Primera petición GraphQL', () => {
 		cy.request({
 			method: 'POST',
 			url: 'https://rickandmortyapi.com/graphql',
